@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:37:50 by ctardy            #+#    #+#             */
-/*   Updated: 2023/04/28 21:41:36 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/04/30 20:00:56 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,30 @@ Fixed& Fixed::operator=(const Fixed &ope){
 		this->_entier = ope._entier;
     }
     return *this;
+}
+
+bool Fixed::operator>(const Fixed &ope){
+	return this->_entier > ope._entier;
+}
+
+bool Fixed::operator<(const Fixed &ope){
+	return this->_entier < ope._entier;
+}
+
+bool Fixed::operator>=(const Fixed &ope){
+	return this->_entier >= ope._entier;
+}
+
+bool Fixed::operator<=(const Fixed &ope){
+	return this->_entier <= ope._entier;
+}
+
+bool Fixed::operator==(const Fixed &ope){
+	return this->_entier == ope._entier;
+}
+
+bool Fixed::operator!=(const Fixed &ope){
+	return this->_entier != ope._entier;
 }
 
 std::ostream &operator<<(std::ostream &os, const Fixed &obj)
