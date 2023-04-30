@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:37:50 by ctardy            #+#    #+#             */
-/*   Updated: 2023/04/30 20:00:56 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/04/30 20:55:12 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ float Fixed::toFloat(void) const{
 	return this->getRawBits() / 256.0f;
 }
 
-// Constuctorz ----------------
+// Constructorz ----------------
 
 Fixed::Fixed(){
 	this->_entier = 0;
@@ -51,13 +51,15 @@ Fixed::Fixed (const Fixed &obj){
 	*this = obj;
 }
 
-Fixed& Fixed::operator=(const Fixed &ope){
+Fixed &Fixed::operator=(const Fixed &ope){
     if (this != &ope) {
 		std::cout << "Copy assignment operator called" << std::endl;
 		this->_entier = ope._entier;
     }
     return *this;
 }
+
+// Operateur de comparaison ----------------
 
 bool Fixed::operator>(const Fixed &ope){
 	return this->_entier > ope._entier;
@@ -88,6 +90,30 @@ std::ostream &operator<<(std::ostream &os, const Fixed &obj)
     os << obj.toFloat();
     return os;
 }
+
+// Operateur arithmetique ----------------
+
+Fixed Fixed::operator+(const Fixed &ope){
+	return this->_entier += ope._entier;
+}
+
+Fixed Fixed::operator-(const Fixed &ope){
+	return this->_entier -= ope._entier;
+}
+
+Fixed Fixed::operator*(const Fixed &ope){
+	return this->_entier *= ope._entier;
+}
+
+Fixed Fixed::operator/(const Fixed &ope){
+	if (this->_entier != 0 && ope._entier != 0){
+		return this->_entier /= ope._entier;
+	}
+	std::cout << "Can't divide by zero" << std::endl;
+	return this->_entier;
+}
+
+// Destructorz ----------------
 
 Fixed::~Fixed(){
 	std::cout << "Destructor called" << std::endl;

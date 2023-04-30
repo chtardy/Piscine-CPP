@@ -24,6 +24,12 @@ class Fixed{
 		bool operator==(const Fixed& ope);
 		bool operator!=(const Fixed& ope);
 		
+		Fixed operator+(const Fixed& ope);
+		Fixed operator-(const Fixed& ope);
+		Fixed operator*(const Fixed& ope);
+		Fixed operator/(const Fixed& ope);
+
+
 		~Fixed();
 		int getRawBits( void ) const;
 		void setRawBits( int const raw );
