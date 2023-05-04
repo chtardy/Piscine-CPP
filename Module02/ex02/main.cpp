@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:04:27 by ctardy            #+#    #+#             */
-/*   Updated: 2023/04/30 20:54:35 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/04 04:53:02 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,29 @@ void compare (Fixed &object1, Fixed &object2){
 
 }
 
-void plus(Fixed &object1, Fixed &object2)
+int	main(void)
 {
-	object1 + object2;
-	std::cout << object1 << std::endl;
-}
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
-void sous(Fixed &object1, Fixed &object2)
-{
-	object1 - object2;
-	std::cout << object1 << std::endl;
-}
-void multi(Fixed &object1, Fixed &object2)
-{
-	object1 * object2;
-	std::cout << object1 << std::endl;
-}
-void divid(Fixed &object1, Fixed &object2)
-{
-	object1 / object2;
-	std::cout << object1 << std::endl;
-}
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
 
-int main() {
-	Fixed object1(110);
-	Fixed object2(100);
-	compare(object1, object2);
-	plus(object1, object2);
-	sous(object1, object2);
-	multi(object1, object2);
-	divid(object1, object2);
+	std::cout << b << std::endl;
+
+	std::cout << Fixed::max( a, b ) << std::endl;
+
+	// 0
+	// 0.00390625
+	// 0.00390625
+	// 0.00390625
+	// 0.0078125
+	// 10.1016
+	// 10.1016
+
+
+	return (0);
 }

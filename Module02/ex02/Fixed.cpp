@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:37:50 by ctardy            #+#    #+#             */
-/*   Updated: 2023/04/30 20:55:12 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/04 04:51:14 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,27 @@ float Fixed::toFloat(void) const{
 
 Fixed::Fixed(){
 	this->_entier = 0;
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int IntNumber) {
-   std::cout << "Int constructor called" << std::endl;
+//    std::cout << "Int constructor called" << std::endl;
    this->_entier = static_cast<int>(roundf(IntNumber * (1 << _entier_statique)));
 }
 
 Fixed::Fixed(float FloatNumber) {
-   std::cout << "Float constructor called" << std::endl;
+//    std::cout << "Float constructor called" << std::endl;
    this->_entier = static_cast<int>(roundf(FloatNumber * (1 << _entier_statique)));
 }
 
 Fixed::Fixed (const Fixed &obj){
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" < std::endl;
 	*this = obj;
 }
 
 Fixed &Fixed::operator=(const Fixed &ope){
     if (this != &ope) {
-		std::cout << "Copy assignment operator called" << std::endl;
+		// std::cout << "Copy assignment operator called" << std::endl;
 		this->_entier = ope._entier;
     }
     return *this;
@@ -94,27 +94,69 @@ std::ostream &operator<<(std::ostream &os, const Fixed &obj)
 // Operateur arithmetique ----------------
 
 Fixed Fixed::operator+(const Fixed &ope){
-	return this->_entier += ope._entier;
+	return (this->toFloat() + ope.toFloat());
 }
 
 Fixed Fixed::operator-(const Fixed &ope){
-	return this->_entier -= ope._entier;
+	return this->toFloat() - ope.toFloat();
 }
 
 Fixed Fixed::operator*(const Fixed &ope){
-	return this->_entier *= ope._entier;
+	return this->toFloat() * ope.toFloat();
 }
 
 Fixed Fixed::operator/(const Fixed &ope){
 	if (this->_entier != 0 && ope._entier != 0){
-		return this->_entier /= ope._entier;
+		return this->toFloat() / ope.toFloat();
 	}
 	std::cout << "Can't divide by zero" << std::endl;
 	return this->_entier;
 }
 
+// Incrementation ----------------
+
+Fixed &Fixed::operator++() {
+	++this->_entier;
+	return *this;
+}
+
+Fixed Fixed::operator++(int incr) {
+	Fixed inter = *this;
+	++this->_entier;
+	return inter;
+}
+
+Fixed &Fixed::operator--(){
+	--this->_entier;
+	return *this;
+}
+
+Fixed Fixed::operator--(int incr) {
+	Fixed inter = *this;
+	--this->_entier;
+	return inter;
+}
+
+// Min et Max ----------------
+
+Fixed Fixed::min(Fixed &a, Fixed &b){
+	return (a._entier > b._entier ? b : a);
+};
+
+const Fixed Fixed::min(const Fixed &a, const Fixed &b){
+	return (a._entier > b._entier ? b : a);
+};
+
+Fixed Fixed::max(Fixed &a, Fixed &b){
+	return (a._entier > b._entier ? a : b);
+};
+
+const Fixed Fixed::max(const Fixed &a, const Fixed &b){
+	return (a._entier > b._entier ? a : b);
+};
+
 // Destructorz ----------------
 
 Fixed::~Fixed(){
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
