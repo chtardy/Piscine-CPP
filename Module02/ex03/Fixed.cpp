@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:37:50 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/05 02:10:42 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/05 01:18:44 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ Fixed::Fixed(float FloatNumber) {
    this->_entier = static_cast<int>(roundf(FloatNumber * (1 << _entier_statique)));
 }
 
+Fixed::Fixed (const Fixed &obj){
+	// std::cout << "Copy constructor called" < std::endl;
+	*this = obj;
+}
 
 Fixed &Fixed::operator=(const Fixed &ope){
     if (this != &ope) {
@@ -55,10 +59,6 @@ Fixed &Fixed::operator=(const Fixed &ope){
     return *this;
 }
 
-Fixed::Fixed (const Fixed &obj){
-	// std::cout << "Copy constructor called" < std::endl;
-	*this = obj;
-}
 // Operateur de comparaison ----------------
 
 bool Fixed::operator>(const Fixed &ope){
