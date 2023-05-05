@@ -12,30 +12,41 @@ class ClapTrap {
 	private : 
 		std::string _name;
 		int HP;
+		int HPMax;
 		int EP;
 		int AD;
+		int DMG;
 		const std::string red;
 		const std::string green;
 		const std::string yellow;
 		const std::string blue;
+		const std::string white;
 		const std::string reset;
 
 
 	public :
-		std::string getName();
-		int getAD();
-		int getHP();
-
-		void setHP(int amount);
-
-		void colorWord(std::string &str, const std::string &word, const std::string &color);
-		void attack(const std::string &target);
-		void takeDamage(unsigned int amount);
-		// void beRepaired(unsigned int amount);
+		void colorName(const std::string &color);
 
 		ClapTrap();
 		ClapTrap(std::string name);
 		~ClapTrap();
+
+		std::string getName();
+		std::string getColor(std::string color);
+		int getAD();
+		int getHP();
+		int getDMG();
+
+		void setHP(int amount);
+		void setEP();
+
+		void checkHP();
+		void checkup();
+	
+		void attack(const std::string &target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
+
 		
 };
 

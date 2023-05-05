@@ -6,26 +6,40 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 04:51:09 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/05 06:54:53 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/05 09:25:58 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : red("\033[0;31m"), green("\033[32m"), yellow("\033[33m"), blue("\033[34m"), reset("\033[0m") {
-	type_text("Constructorz by default called", 1);
-	HP = 10;
-	EP = 10;
-	AD = 0;
+void ClapTrap::colorName(const std::string &color) {
+    int length = _name.length();
+	int pos = 0;
+    _name.insert(0, color);
+    pos = length + color.length();
+    _name.insert(pos, reset);
 }
 
-ClapTrap::ClapTrap(std::string name) : red("\033[0;31m"), green("\033[32m"), yellow("\033[33m"), blue("\033[34m"), reset("\033[0m") {
-	type_text("Constructorz with name called : ", 0);
-	type_text(name, 1);
-	_name = name;
+// Constructorz --------------------------------------------
+
+ClapTrap::ClapTrap() : red("\033[0;31;1m"), green("\033[32;1m"), yellow("\033[33;1m"), blue("\033[34;1m"), white("\033[37;1m"), reset("\033[0m") {
+	type_text("Constructorz by default called", 1);
 	HP = 10;
+	HPMax = HP;
 	EP = 10;
 	AD = 0;
+	DMG = 0;
+}
+
+ClapTrap::ClapTrap(std::string name) : red("\033[0;31;1m"), green("\033[32;1m"), yellow("\033[33;1m"), blue("\033[34;1m"), white("\033[37;1m"), reset("\033[0m") {
+	_name = name;
+	type_text("Constructorz with name called : ", 0);
+	type_text(name, 1);
+	HP = 10;
+	HPMax = HP;
+	EP = 10;
+	AD = 2;
+	DMG = 0;
 }
 
 ClapTrap::~ClapTrap() {
@@ -33,7 +47,7 @@ ClapTrap::~ClapTrap() {
 	type_text(this->_name, 1);
 }
 
-// --------------------------------------------
+// Getterz --------------------------------------------
 
 std::string ClapTrap::getName() {
 	return _name;
@@ -47,40 +61,122 @@ int ClapTrap::getHP() {
 	return HP;
 }
 
+int ClapTrap::getDMG() {
+	int FinalDMG = DMG;
+	DMG = 0;
+	return FinalDMG;
+}
+
+std::string ClapTrap::getColor(std::string color) {
+	return color == "red" ? red :
+		color == "green" ? green :
+		color == "yellow" ? yellow :
+		color == "blue" ? blue : 
+		color == "white" ? white : NULL;
+}
+
+// Setterz --------------------------------------------
 
 void ClapTrap::setHP(int amount) {
 	this->HP = amount;
 }
 
-// --------------------------------------------
-void ClapTrap::colorWord(std::string &str, const std::string &word, const std::string &color) {
-    std::size_t pos = 0;
-    while ((pos = str.find(word, pos)) != std::string::npos) {
-        str.insert(pos, color);
-        pos += color.length() + word.length();
-        str.insert(pos, reset);
-        pos += reset.length();
-    }
+void ClapTrap::setEP() {
+	EP -= 1;
 }
 
+// Checkerz --------------------------------------------
+
+void ClapTrap::checkHP() {
+	if (HP == 0) {
+		std::string catchh = _name + " is dead ! 💀";
+		type_text(catchh, 1);
+	}
+}
+void ClapTrap::checkup() {
+	std::ostringstream oss;
+	std::string catchh;
+	oss << _name << " has right now :" << std::endl
+	<< " * " << green << HP << reset << " HP ! 🧪" << std::endl
+	<< " * " << blue << EP << reset << " EP ! 🌟" << std::endl;
+	catchh = oss.str();
+	type_text(catchh, 0);
+}
+
+// Actionz --------------------------------------------
+
 void ClapTrap::attack(const std::string &target) {
-    std::ostringstream oss;
-    std::ostringstream oss2;
-	
+	std::ostringstream oss;
+	if (EP == 0) {
+		oss << _name << " has no more EP, he can't attack anymore 🤖";
+		type_text(oss.str(), 1);
+		return;
+	}
+	else if (HP == 0) { 
+		oss << _name << " died, he can't attack anymore 🎚";
+		type_text(oss.str(), 1);
+		return;
+	}
 	oss << "ClapTrap " <<_name << " attacks " << target;
     std::string result = oss.str();
-	colorWord(result, "Bertrand", yellow);
-	colorWord(result, target, green);
     type_text(result, 0);
-	
-	oss2 << ", causing " << red << AD << reset << " point(s) of damage !" << std::endl;
-    result.assign(oss2.str());
+	oss.str("");
+	oss << ", causing " << red << AD << reset << " point(s) of damage ! 🔪" << std::endl;
+    result.assign(oss.str());
     type_text(result, 0);
+	oss.str("");
+	setEP();
+	oss << _name << "has now " << blue << EP << reset << " EP ! 🌟";
+	DMG += AD;
     return ;
 }
 
 void ClapTrap::takeDamage(unsigned int amount){
-	std::cout << _name << " has take " << amount << " point(s) of damage !" << std::endl;
-	this->setHP((this->getHP() - amount));
-	// type_text("")
+	std::ostringstream oss;
+    if (HP == 0) { 
+		oss << _name << " is already dead 😵";
+		type_text(oss.str(), 1);
+		return;
+	}
+	std::string catchh;
+	int baseHP = getHP();
+	oss << _name << " has taken " << red <<  amount << reset << " point(s) of damage ! 🤕" << std::endl;
+	catchh = oss.str();
+	type_text(catchh, 0);
+	if (amount > baseHP) {
+		amount = baseHP;
+	}
+	setHP((baseHP - amount));
+	oss.str("");
+	oss << _name << " has now " << green << HP << reset << " HP ! 🧪" << std::endl;
+	catchh.assign(oss.str());
+	type_text(catchh, 0);
+	checkHP();
+}
+
+void ClapTrap::beRepaired(unsigned int amount) {
+	std::ostringstream oss;
+	std::string catchh;
+	if (EP == 0) {
+		oss << _name << " has no more EP, he can't repair himself anymore 🤖";
+		type_text(oss.str(), 1);
+		return;
+	}
+	else if (HP == 0) { 
+		oss << _name << " died, it's too late for repair himself 🎚";
+		type_text(oss.str(), 1);
+		return;
+	}
+	oss << _name << " repair his wounds and get " << green << amount << " HP back ! ⛏🧰" << std::endl;
+	catchh = oss.str();
+	type_text(catchh, 0);
+	if (amount + getHP() > HPMax) {
+		amount = HPMax - getHP();
+	}
+	setHP(getHP() + amount);
+	oss.str("");
+	oss << _name << " have now " << green << getHP() << reset << " HP ! 🔩" << std::endl;
+	catchh.assign(oss.str());
+	type_text(catchh, 0);
+	
 }
