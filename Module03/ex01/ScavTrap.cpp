@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 11:10:13 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/09 13:58:50 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:12:32 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,31 @@ void ScavTrap::guardGate(){
 }
 
 
+void ScavTrap::attack(const std::string &target) {
+	std::ostringstream oss;
+	if (EP == 0) {
+		oss << _name << " has no more EP, he can't attack anymore 🤖";
+		type_text(oss.str(), 1);
+		return;
+	}
+	else if (HP == 0) { 
+		oss << _name << " died, he can't attack anymore 🎚";
+		type_text(oss.str(), 1);
+		return;
+	}
+	oss << "ClapTrap " <<_name << " ScrapTrap attacks " << target;
+    std::string result = oss.str();
+    type_text(result, 0);
+	oss.str("");
+	oss << ", causing " << red << AD << reset << " point(s) of damage ! 🔪" << std::endl;
+    result.assign(oss.str());
+    type_text(result, 0);
+	oss.str("");
+	setEP();
+	oss << _name << "has now " << blue << EP << reset << " EP ! 🌟";
+	DMG += AD;
+    return ;
+}
 
 void ScavTrap::colorNameDaughter(const std::string &color) {
     int length = _nameDaughter.length();

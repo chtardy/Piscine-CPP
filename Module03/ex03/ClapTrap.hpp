@@ -31,7 +31,7 @@ class ClapTrap {
 		ClapTrap(const ClapTrap &other);
 		ClapTrap &operator=(const ClapTrap &other);
 		ClapTrap(std::string name, int HP, int EP, int AD);
-		~ClapTrap();
+		virtual ~ClapTrap();
 
 		std::string getName();
 		std::string getColor(std::string color);
@@ -52,6 +52,5 @@ class ClapTrap {
 };
 
 void type_text(std::string text, int flag);
-void type_int(int num);
 
 #endif

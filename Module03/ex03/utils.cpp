@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 05:04:55 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/05 06:16:30 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:27:43 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void type_text(std::string text, int flag) {
 	{
 		for (int i = 0; i < text.size(); ++i) {
 			std::cout << text[i] << std::flush;
-			usleep(15000);
+		//	usleep(15000);
 		}
 		return;	
 	}
 	for (int i = 0; i < text.size(); ++i)
 	{
 		std::cout << text[i] << std::flush;
-		usleep(17000);
+	//	usleep(17000);
 	}
 	std::cout << "\n" << std::flush;
 	return;

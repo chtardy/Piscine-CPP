@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 04:58:18 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/06 12:46:51 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:11:50 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main() {
 	getInfo(oss, daughter, daughter.getHP(), 1);
 	getInfo(oss, daughter, daughter.getEP(), 2);
 	getInfo(oss, daughter, daughter.getAD(), 3);
+	daughter.attack("Virginie");
 	daughter.guardGate();
 	return 0;
 }

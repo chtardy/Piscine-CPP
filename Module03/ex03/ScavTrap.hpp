@@ -3,9 +3,9 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap{
+class ScavTrap : virtual public ClapTrap{
 
-	private :
+	protected :
 		std::string _nameDaughter;
 
 
@@ -14,14 +14,13 @@ class ScavTrap : public ClapTrap{
 		ScavTrap(std::string name);
 		ScavTrap(const ScavTrap &other);
 		ScavTrap &operator=(const ScavTrap &other);
-		~ScavTrap();
+		virtual ~ScavTrap();
 
 		void guardGate();
 		void colorNameDaughter(const std::string &color);
-
+		void attack(const std::string &target);
 
 } ;
-
 
 
 

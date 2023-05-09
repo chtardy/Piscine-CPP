@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 11:10:13 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/09 14:22:24 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:40:05 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ FragTrap::FragTrap() : ClapTrap() {
 	type_text("Constructorz Frag by default : ", 1);
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30), _nameDaughter(_name) {
+FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30), _nameDaughter(name) {
 	type_text("Constructorz Frag with stats : ", 0);
 	type_text(_nameDaughter, 1);
 }
