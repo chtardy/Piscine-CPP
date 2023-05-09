@@ -9,7 +9,7 @@
 
 class ClapTrap {
 
-	private : 
+	protected : 
 		std::string _name;
 		int HP;
 		int HPMax;
@@ -28,13 +28,15 @@ class ClapTrap {
 
 		ClapTrap();
 		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap& other);
+		ClapTrap(const ClapTrap &other);
 		ClapTrap &operator=(const ClapTrap &other);
+		ClapTrap(std::string name, int HP, int EP, int AD);
 		~ClapTrap();
 
 		std::string getName();
 		std::string getColor(std::string color);
 		int getAD();
+		int getEP();
 		int getHP();
 		int getDMG();
 
@@ -47,10 +49,9 @@ class ClapTrap {
 		void attack(const std::string &target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
-
-		
 };
 
 void type_text(std::string text, int flag);
+void type_int(int num);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 04:51:09 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/09 13:07:54 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/09 14:48:16 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void ClapTrap::colorName(const std::string &color) {
     pos = length + color.length();
     _name.insert(pos, reset);
 }
+
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
@@ -37,7 +38,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 // Constructorz --------------------------------------------
 
 ClapTrap::ClapTrap() : red("\033[0;31;1m"), green("\033[32;1m"), yellow("\033[33;1m"), blue("\033[34;1m"), white("\033[37;1m"), reset("\033[0m") {
-	type_text("Constructorz by default called", 1);
+	type_text("Constructorz mother by default called", 1);
 	HP = 10;
 	HPMax = HP;
 	EP = 10;
@@ -47,7 +48,7 @@ ClapTrap::ClapTrap() : red("\033[0;31;1m"), green("\033[32;1m"), yellow("\033[33
 
 ClapTrap::ClapTrap(std::string name) : red("\033[0;31;1m"), green("\033[32;1m"), yellow("\033[33;1m"), blue("\033[34;1m"), white("\033[37;1m"), reset("\033[0m") {
 	_name = name;
-	type_text("Constructorz with name called : ", 0);
+	type_text("Constructorz mother with name called : ", 0);
 	type_text(name, 1);
 	HP = 10;
 	HPMax = HP;
@@ -56,8 +57,19 @@ ClapTrap::ClapTrap(std::string name) : red("\033[0;31;1m"), green("\033[32;1m"),
 	DMG = 0;
 }
 
+ClapTrap::ClapTrap(std::string name, int HPset, int EPset, int ADset) : red("\033[0;31;1m"), green("\033[32;1m"), yellow("\033[33;1m"), blue("\033[34;1m"), white("\033[37;1m"), reset("\033[0m") {
+	_name = name;
+	type_text("Constructorz mother with stats called : ", 0);
+	type_text(name, 1);
+	HP = HPset;
+	HPMax = HP;
+	EP = EPset;
+	AD = ADset;
+	DMG = 0;
+}
+
 ClapTrap::~ClapTrap() {
-	type_text("Destructorz called : ", 0);
+	type_text("Destructorz mother called : ", 0);
 	type_text(this->_name, 1);
 }
 
@@ -69,6 +81,10 @@ std::string ClapTrap::getName() {
 
 int ClapTrap::getAD() {
 	return AD;
+}
+
+int ClapTrap::getEP() {
+	return EP;
 }
 
 int ClapTrap::getHP() {
