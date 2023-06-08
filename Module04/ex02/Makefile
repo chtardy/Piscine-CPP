@@ -1,4 +1,4 @@
-NAME 	= ./brain
+NAME 	= ./abstract
 SRCS 	= main.cpp utils.cpp Brain.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 OBJS 	= ${SRCS:.cpp=.o}
 CC		= c++
@@ -12,7 +12,7 @@ all			:	${NAME}
 ${NAME} 	:	${OBJS}
 				@echo "\033[32m\n🧠 Compiling ... \n\033[33;1m"
 				$(CC) ${CFLAGS} ${OBJS} -o ${NAME}
-				@echo "\033[32m📄 ex01 Compiled !\n"
+				@echo "\033[32m📄 ex02 Compiled !\n"
 
 clean		:	
 				@echo "\033[32m\n🧻 Clean ... \n\033[33;1m"

@@ -3,9 +3,9 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : virtual public ClapTrap{
+class FragTrap : public ClapTrap{
 
-	protected :
+	private :
 		std::string _nameDaughter;
 
 
@@ -14,10 +14,11 @@ class FragTrap : virtual public ClapTrap{
 		FragTrap(std::string name);
 		FragTrap(const FragTrap &other);
 		FragTrap &operator=(const FragTrap &other);
-		virtual ~FragTrap();
+		~FragTrap();
 
 		void highFivesGuys(void);
 		void colorNameDaughter(const std::string &color);
+
 
 } ;
 

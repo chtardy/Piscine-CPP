@@ -4,14 +4,14 @@ OBJS 	= ${SRCS:.cpp=.o}
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98 #-fsanitize=address
 
-.c.o: 
+.cpp.o: 
 				${CC} ${CFLAGS} -c $< -o ${<:.cpp=.o}
 				
 all			:	${NAME}
 
 ${NAME} 	:	${OBJS}
 				@echo "\033[32m\n🧠 Compiling ... \n\033[33;1m"
-				@$(CC) ${OBJS} -o ${NAME}
+				$(CC) ${CFLAGS} ${OBJS} -o ${NAME}
 				@echo "\033[32m📄 ex00 Compiled !\n"
 
 clean		:	

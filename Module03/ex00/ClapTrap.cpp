@@ -6,7 +6,7 @@
 /*   By: ctardy <ctardy@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 04:51:09 by ctardy            #+#    #+#             */
-/*   Updated: 2023/05/09 15:46:09 by ctardy           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:07:54 by ctardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ ClapTrap::ClapTrap(std::string name) : red("\033[0;31;1m"), green("\033[32;1m"),
 	HP = 10;
 	HPMax = HP;
 	EP = 10;
-	AD = 0;
+	AD = 2;
 	DMG = 0;
 }
 

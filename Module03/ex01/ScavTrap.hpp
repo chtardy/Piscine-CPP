@@ -5,7 +5,7 @@
 
 class ScavTrap : public ClapTrap{
 
-	protected :
+	private :
 		std::string _nameDaughter;
 
 
@@ -18,8 +18,10 @@ class ScavTrap : public ClapTrap{
 
 		void guardGate();
 		void colorNameDaughter(const std::string &color);
-		void attack(const std::string &target);
 
 } ;
+
+
+
 
 #endif
